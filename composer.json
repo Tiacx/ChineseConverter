@@ -1,0 +1,23 @@
+{
+    "name": "tiacx/chinese-converter",
+    "description": "中文简繁体转换",
+    "type": "library",
+    "require": {
+        "php": ">=5.6",
+        "ext-mbstring": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tiacx\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tiac"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "version": "1.0.0"
+}
