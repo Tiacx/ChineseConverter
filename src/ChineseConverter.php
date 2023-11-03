@@ -28,6 +28,13 @@ class ChineseConverter
      */
     public static function convert($input, $type)
     {
+        if (function_exists('opencc_convert')) {
+            $od = opencc_open($type . '.json');
+            $output = opencc_convert($input, $od);
+            opencc_close($od);
+            return $output;
+        }
+
         if (!isset(self::$hanziDict[$type])) {
             try {
                 self::$hanziDict[$type] = require __DIR__ . "/hanzi/{$type}.php";
