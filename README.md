@@ -10,29 +10,27 @@
 
 支持的转换类型：s2t、s2tw、s2hk、t2s、tw2s、hk2s
 
-**注：当系统已安装 `opencc` 及 `opencc4php` 时，使用 `opencc` 翻译；否则，使用内置字典翻译。**
+**注：当系统已安装 `opencc` 命令行工具时，优先使用 `opencc` 翻译；否则，使用内置字典翻译。**
 
 安装
 -------
 
-安装 `opencc` 及 `opencc4php` 扩展（可省略）
+安装 `opencc` 命令行工具（可省略，不安装时使用内置字典翻译）
 
-```base
-RUN apk add gcc g++ libc-dev make cmake autoconf openssl-dev curl-dev doxygen \
-    && wget https://github.com/BYVoid/OpenCC/archive/refs/tags/ver.1.1.6.tar.gz \
-    && tar -zxvf ver.1.1.6.tar.gz \
-    && cd OpenCC-ver.1.1.6 \
-    && make && make install \
-    && cd ../ \
-    && unzip opencc4php-master.zip \
-    && cd opencc4php-master \
-    && phpize \
-    && ./configure \
-    && make && make install \
-    && cp modules/opencc.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/opencc.so \
-    && echo "extension=opencc.so" > /usr/local/etc/php/conf.d/opencc.ini \
-    && cd ../ && rm -rf OpenCC-ver.1.1.6 opencc4php ver.1.1.6.tar.gz
+Docker / Alpine：
+
+```bash
+RUN apk add opencc
 ```
+
+其他平台：
+
+| 系统 | 安装方式 |
+|------|----------|
+| Debian / Ubuntu | `apt install opencc` |
+| CentOS / Fedora | `yum install opencc`（需 EPEL）或 `dnf install opencc` |
+| macOS | `brew install opencc` |
+| Windows | 从 [OpenCC Releases](https://github.com/BYVoid/OpenCC/releases) 下载后，将 `opencc` 所在目录加入 `PATH` |
 
 安装本扩展
 
@@ -89,8 +87,8 @@ print_r(ChineseConverter::convertGetAll('心裏'));
 Array
 (
     [0] => 心里
-    [2] => 心裏
-    [3] => 心裡
+    [1] => 心裏
+    [2] => 心裡
 )
 Array
 (
@@ -102,6 +100,6 @@ Array
 (
     [0] => 心裏
     [1] => 心里
-    [3] => 心裡
+    [2] => 心裡
 )
 ```
